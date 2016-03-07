@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-body">
+								<div class="panel-body" style="padding-bottom: 0px;">
+									<div class="panel panel-default">
+										<div class="panel-heading">奖品维护</div>
+										<div class="panel-body">
+											<div class="form-horizontal">
+												<div class="form-group" style="margin-top: 15px">
+													<label class="control-label col-sm-1" for="queryactname">奖品名称</label>
+													<div class="col-sm-3">
+														<input type="text" class="form-control"
+															id="queryprizename">
+													</div>
+													<div class="col-sm-4" style="text-align: left;">
+														<button type="button" style="margin-left: 50px"
+															class="btn btn-primary" id="btn_query">查询</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="toolbar" class="btn-group">
+										<button id="btn_add" data-target="#addEditModal"
+											data-toggle="modal" type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+										</button>
+										<button id="btn_delete" type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除已选
+										</button>
+									</div>
+									<form id="formid" method="post">
+										<div class="row">
+											<div class="modal fade" id="addEditModal" tabindex="-1"
+												role="dialog" aria-labelledby="addEditModalLabel"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true">
+																<span class="glyphicon glyphicon-remove"></span>
+															</button>
+															<h4 class="modal-title" id="addEditModalLabel"></h4>
+														</div>
+														<div class="modal-body">
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_prizeName">奖品名称</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="hidden" id="seqId" name="seqId" value="0" />
+																	<input type="text" id="prizeName" name="prizeName"
+																		class="form-control" placeholder=""
+																		aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_prizeType">奖品类型</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<select class="form-control" id="select_prizeTypeList"
+																		name="prizeType" onchange="selPrizeType(this.value);">
+																	</select>
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span
+																		id="chk_prizeEntity">具体奖品</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<select class="form-control"
+																		id="select_prizeEntityList" name="prizeEntity">
+																	</select>
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">奖品批号</small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="prizeEntityId"
+																		name="prizeEntityId" class="form-control"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_stock">设置奖品份数(份)</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="stock" name="stock"
+																		class="form-control"
+																		onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_sendLimit">每日发送限制(份)</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="sendLimit" name="sendLimit"
+																		class="form-control"
+																		onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_useLimit">单个用户领取次数限制</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="useLimit" name="useLimit"
+																		class="form-control"
+																		onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_starttime">开始时间</span></small>
+																</h2>
+																<div id="starttimediv" class="input-group col-lg-4">
+																	<input id="startTime" name="startTime" type="text"
+																		class="form-control" placeholder=""
+																		aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_endtime">结束时间</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input id="endTime" name="endTime" type="text"
+																		class="form-control" placeholder=""
+																		aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_validDay">有效期(天)</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="validDay" name="validDay"
+																		class="form-control"
+																		onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span id="chk_sendLevel">发送频率报警</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="sendLevel" name="sendLevel"
+																		class="form-control"
+																		onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4"><span
+																		class="itemMustInput">*</span><span
+																		id="chk_stockLevel">奖品库存报警</span></small>
+																</h2>
+																<div class="input-group col-lg-4">
+																	<input type="text" id="stockLevel" name="stockLevel"
+																		class="form-control"
+																		onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+																		placeholder="" aria-describedby="basic-addon2">
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">关闭</button>
+															<button type="button" id="submitAddNode"
+																class="btn btn-primary" data-dismiss="modal">
+																提交新增</button>
+															<button type="button" id="submitEditNode"
+																class="btn btn-primary" data-dismiss="modal">
+																提交修改</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- 详情展示 -->
+										<div class="row">
+											<div class="modal fade" id="detailModal" tabindex="-1"
+												role="dialog" aria-labelledby="detailModal"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true">
+																<span class="glyphicon glyphicon-remove"></span>
+															</button>
+															<h4 class="modal-title" id="addEditModalLabel"></h4>
+														</div>
+														<div class="modal-body">
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">奖品名称：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_prizeName">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">奖品类型：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_prizeTypeName">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">具体奖品：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_prizeEntityName">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">奖品批号：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_prizeEntityId">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">设置奖品份数(份)：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_stock">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">剩余库存：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_realStock">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">每日发送限制(份)：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_sendLimit">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">单个用户领取次数限制：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_useLimit">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">开始时间：</small>
+																</h2>
+																<div id="show_startTime" class="input-group col-lg-4">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">结束时间：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_endTime">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">状态：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_statusDesc">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">有效期(天)：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_validDay">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">发送频率报警：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_sendLevel">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">奖品库存报警：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_stockLevel">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">创建人：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_createBy">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">创建时间：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_createTime">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">修改人：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_editBy">
+																</div>
+															</div>
+															<div class="row show-grid">
+																<h2>
+																	<small class="col-lg-4">修改时间：</small>
+																</h2>
+																<div class="input-group col-lg-4" id="show_editTime">
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">关闭</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+
+									<table id="table" data-toggle="table" data-locale="zh-CN"
+										data-click-to-select="true"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+			</section>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		$('#startTime').datetimepicker({
+			format : 'YYYY-MM-DD HH:mm:ss'
+		});
+		$('#endTime').datetimepicker({
+			format : 'YYYY-MM-DD HH:mm:ss'
+		});
+
+		$('#btn_add').on('click', function() {
+			//隐藏编辑提交按钮
+			$("#submitEditNode").attr("class", "hidden");
+			resetData();
+			initPrizeType("");
+		});
+		$('#btn_delete').on(
+				'click',
+				function() {
+					var selectedRows = $('#table').bootstrapTable(
+							'getSelections');
+					if (selectedRows.length == 0) {
+						alert("请选择要操作的数据");
+						return;
+					}
+					if (!confirm("确认要删除当前选中的记录吗?"))
+						return;
+					var objects = $.map($('#table').bootstrapTable(
+							'getSelections'), function(row) {
+						return row.seqId;
+					});
+					delData(objects.join());
+				});
+
+		function delData(seqids) {
+			$.ajax({
+				type : "POST",
+				url : "deletePrize.do",
+				data : {
+					seqids : seqids
+				},
+				dataType : "json",
+				success : function(data) {
+					if (data.rtn == "8888") {
+						alert("无此操作权限");
+					} else if (data.rtn == "0") {
+						initTable();
+					}
+				},
+				error : function(res) {
+					alert("操作失败");
+				}
+			});
+		}
+
+		function initTable() {
+			//先销毁表格  
+			$('#table').bootstrapTable('destroy');
+			//初始化表格,动态从服务器加载数据  
+			$('#table').bootstrapTable({
+				method : "post", //使用get请求到服务器获取数据  
+				url : "getAllPrizeList.do", //获取数据的Servlet地址 
+				contentType : "application/x-www-form-urlencoded",
+				toolbar : '#toolbar',
+				striped : true, //表格显示条纹  
+				pagination : true, //启动分页  
+				pageSize : 10, //每页显示的记录数  
+				pageNumber : 1, //当前第几页  
+				pageList : [ 10, 20, 50, 100 ], //记录数可选列表  
+				search : false, //是否启用查询  
+				showColumns : true, //显示下拉框勾选要显示的列  
+				showRefresh : false, //显示刷新按钮  
+				sidePagination : "server", //表示服务端请求  
+				uniqueId : "ID", //每一行的唯一标识，一般为主键列
+				clickToSelect : false, //是否启用点击选中行
+				minimumCountColumns : 2, //最少允许的列数
+				//设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder  
+				//设置为limit可以获取limit, offset, search, sort, order  
+				queryParamsType : "undefined",
+				queryParams : function queryParams(params) { //设置查询参数  
+					var param = {
+						pageNumber : params.pageNumber,
+						pageSize : params.pageSize,
+						prizeinfo : $("#queryprizename").val()
+					};
+					return param;
+				},
+				columns : [ {
+					checkbox : true
+				}, {
+					field : 'seqId',
+					editable : true,
+					title : '奖品ID'
+				}, {
+					editable : true,
+					field : 'prizeName',
+					title : '奖品名称'
+				}, {
+					field : 'prizeKey',
+					title : '奖品KEY',
+				}, {
+					field : 'prizeType',
+					title : '奖品类型ID',
+					visible : false
+				}, {
+					field : 'prizeTypeName',
+					title : '奖品类型',
+				}, {
+					field : 'prizeEntity',
+					title : '具体奖品ID',
+					visible : false
+				}, {
+					field : 'prizeEntityName',
+					title : '具体奖品'
+				}, {
+					field : 'prizeEntityId',
+					title : '奖品批号',
+					visible : false
+				}, {
+					field : 'statusDesc',
+					title : '状态'
+				}, {
+					field : 'realStock',
+					title : '库存'
+				}, {
+					field : 'editBy',
+					title : '修改人'
+				}, {
+					field : 'sendLimit',
+					title : '每日发送限制',
+					visible : false
+				}, {
+					field : 'useLimit',
+					title : '单个用户领取限制',
+					visible : false
+				}, {
+					field : 'validDay',
+					title : '有效期(天)',
+					visible : false
+				}, {
+					field : 'sendLevel',
+					title : '发送频率预警',
+					visible : false
+				}, {
+					field : 'stockLevel',
+					title : '奖品库存预警',
+					visible : false
+				}, {
+					editable : true,
+					field : 'startTime',
+					title : '开始时间',
+					visible : false
+				}, {
+					editable : true,
+					field : 'endTime',
+					title : '结束时间',
+					visible : false
+				}, {
+					field : 'operate',
+					title : '操作',
+					align : 'center',
+					events : operateEvents,
+					formatter : operateFormatter
+				}, ],
+				onLoadSuccess : function() { //加载成功时执行  
+
+				},
+				onLoadError : function() { //加载失败时执行  
+
+				}
+			});
+		}
+
+		function operateFormatter(value, row, index) {
+			return [
+					'<a class="detail" href="javascript:void(0)" data-target="#detailModal" data-toggle="modal" title="详情">',
+					'<i class="glyphicon glyphicon-th-list"></i>',
+					'</a>&nbsp;&nbsp;&nbsp;&nbsp;',
+					'<a class="edit" href="javascript:void(0)" data-target="#addEditModal" data-toggle="modal" title="修改">',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>&nbsp;&nbsp;&nbsp;&nbsp;',
+					'<a class="remove" href="javascript:void(0)" title="删除">',
+					'<i class="glyphicon glyphicon-remove"></i>', '</a>' ]
+					.join('');
+		}
+
+		window.operateEvents = {
+			'click .detail' : function(e, value, row, index) {
+				detailShow($('#detailModal'), row);
+			},
+			'click .edit' : function(e, value, row, index) {
+				$("#submitAddNode").attr("class", "hidden");
+				resetData();//重置数据
+				$.each(row, function(key, val) {      
+			       if($('#'+key)){
+			    	   $('#'+key).val(val);
+			       }
+			 　　});
+				//初始化奖品分类
+				initPrizeType(row.prizeType);
+				//初始化具体奖品
+				selPrizeType(row.prizeType, row.prizeEntity);
+			},
+			'click .remove' : function(e, value, row, index) {
+				if (!confirm("确认要删除该记录吗?"))
+					return;
+				delData(row.seqId);
+			}
+		};
+		//重置数据	
+		function resetData() {
+			$('#seqId').val("0");
+			$('#prizeName').val("");
+			$('#prizeEntityId').val("");
+			$('#stock').val("0");
+			$('#sendLimit').val("1");
+			$('#useLimit').val("1");
+			$('#validDay').val("0");
+			$('#stockLevel').val("0");
+			$('#sendLevel').val("0");
+			$('#startTime').val("");
+			$('#endTime').val("");
+		}
+
+		$(function() {
+			//调用函数，初始化表格  
+			initTable();
+			//当点击查询按钮的时候执行  
+			$("#btn_query").bind("click", initTable);
+			$('#submitAddNode').on('click', {
+				action : "addPrize.do"
+			}, addOrUpdateActivity);
+			$('#submitEditNode').on('click', {
+				action : "updatePrize.do"
+			}, addOrUpdateActivity);
+		});
+		function addOrUpdateActivity(event) {
+			if (!requireCheck(jQuery("#formdiv"))) {
+				return false;
+			}
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : event.data.action,
+				data : $('#formid').serialize(),
+				success : function(data) {
+					if (data.rtn == "8888") {
+						alert("无此操作权限");
+					} else {
+						initTable();
+					}
+				},
+				error : function(json) {
+					alert("操作失败");
+				}
+			});
+		}
+		function selPrizeType(prizetype, sel) {
+			if (prizetype == "") {
+				$('#select_prizeEntityList').html("");
+				return;
+			}
+			initSelectOption($('#select_prizeEntityList'),
+					"sysPrizeEntityList.do?id=" + prizetype, sel, true);
+		}
+
+		function initPrizeType(sel) {
+			initSelectOption($('#select_prizeTypeList'), "sysPrizeTypeList.do",
+					sel, true);
+		}
+	</script>
+</body>
+</html>

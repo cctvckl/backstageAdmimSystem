@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+    http://www.springframework.org/schema/mvc   
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-4.0.xsd
+    http://www.springframework.org/schema/util 
+    http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- redis配置文件 -->
+	<import resource="classpath:jedisContext.xml" />
+
+	<!--默认的mvc注解映射的支持 -->
+	<mvc:annotation-driven >
+		<mvc:message-converters>  
+            <bean class="com.kankan.op.utils.UTF8StringHttpMessageConverter" />  
+        </mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath*:*.properties" />
+
+	<!-- 支持异步方法执行 -->
+	<task:annotation-driven />
+
+	<!-- 自动扫面com.springmvc目录及其子目录下面所有类文件，自动注入所有带注解的类 -->
+	<context:component-scan base-package="com.kankan.*" />
+	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".html" />
+		<property name="order" value="1" />
+	</bean>
+	
+	<!-- 指明静态资源位置 -->
+	<mvc:resources location="/" mapping="/*.html"></mvc:resources>
+	<mvc:resources location="/bootstrap/" mapping="/bootstrap/**"></mvc:resources>
+	<mvc:resources location="/build/" mapping="/build/**"></mvc:resources>
+	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/dist/" mapping="/dist/**"></mvc:resources>
+	<mvc:resources location="/documentation/" mapping="/documentation/**"></mvc:resources>
+	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+	<mvc:resources location="/pages/" mapping="/pages/**"></mvc:resources>
+	<mvc:resources location="/plugins/" mapping="/plugins/**"></mvc:resources>
+
+	<mvc:interceptors> 
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do" />
+			<mvc:mapping path="/*.html" />
+			<mvc:mapping path="/*/*.html" />
+			<mvc:exclude-mapping path="/login.html" />
+			<mvc:exclude-mapping path="/login.do" />
+			<mvc:exclude-mapping path="/validation.do" />
+			<mvc:exclude-mapping path="/signOut.do" />
+			<bean class="com.kankan.security.LoginSecurityInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/add*.do" />
+			<mvc:mapping path="/delete*.do" />
+			<mvc:mapping path="/update*.do" />
+			<mvc:mapping path="/get*.do" />
+			<bean class="com.kankan.security.AuthSecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<mvc:view-controller path="/" view-name="redirect:/index.html"/>
+
+</beans>

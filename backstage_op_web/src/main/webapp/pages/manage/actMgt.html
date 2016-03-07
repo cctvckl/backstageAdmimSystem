@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Main content -->
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+							<div class="box-body">
+								<div class="panel-body" style="padding-bottom: 0px;">
+									<div class="panel panel-default">
+										<div class="panel-heading">活动ID管理</div>
+										<div class="panel-body">
+											<div class="form-horizontal">
+												<div class="form-group" style="margin-top: 15px">
+													<label class="control-label col-sm-1"
+														for="queryactname">活动名称</label>
+													<div class="col-sm-3">
+														<input type="text" class="form-control"
+															id="queryactname">
+													</div>
+													<div class="col-sm-4" style="text-align: left;">
+														<button type="button" style="margin-left: 50px" class="btn btn-primary" id="btn_query">查询</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="toolbar" class="btn-group">
+										<button id="btn_add" data-target="#addEditModal"
+											data-toggle="modal" type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+										</button>
+										<button id="btn_delete" type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除已选
+										</button>
+									</div>
+									<div class="row">
+										<div class="modal fade" id="addEditModal" tabindex="-1"
+											role="dialog" aria-labelledby="addEditModalLabel"
+											aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true"><span class="glyphicon glyphicon-remove"></span></button>
+														<h4 class="modal-title" id="addEditModalLabel"></h4>
+													</div>
+													<div class="modal-body">
+														<div class="row show-grid">
+															<h2>
+																<small class="col-lg-4"><span
+																	class="itemMustInput">*</span><span id="chk_actname">活动名称</span></small>
+															</h2>
+															<div class="input-group col-lg-4">
+																<input type="hidden" id="seqid" name="seqid" value="0" />
+																<input type="text" id="actname" class="form-control"
+																	placeholder="" aria-describedby="basic-addon2">
+															</div>
+														</div>
+														<div class="row show-grid">
+															<h2>
+																<small class="col-lg-4"><span
+																	class="itemMustInput">*</span>所属团队</small>
+															</h2>
+															<div class="input-group col-lg-4">
+																<select class="form-control" id="select_teamlist">
+
+																</select>
+															</div>
+														</div>
+
+														<div class="row show-grid">
+															<h2>
+																<small class="col-lg-4"><span
+																	class="itemMustInput">*</span><span id="chk_effecttime">开始时间</span></small>
+															</h2>
+															<div id="effecttimediv" class="input-group col-lg-4">
+																<input id="effecttime" type="text" class="form-control"
+																	placeholder="" aria-describedby="basic-addon2">
+															</div>
+														</div>
+														<div class="row show-grid">
+															<h2>
+																<small class="col-lg-4"><span
+																	class="itemMustInput">*</span><span id="chk_expiretime">结束时间</span></small>
+															</h2>
+															<div class="input-group col-lg-4">
+																<input id="expiretime" type="text" class="form-control"
+																	placeholder="" aria-describedby="basic-addon2">
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">关闭</button>
+														<button type="button" id="submitAddNode"
+															class="btn btn-primary" data-dismiss="modal">
+															提交新增</button>
+														<button type="button" id="submitEditNode"
+															class="btn btn-primary" data-dismiss="modal">
+															提交修改</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<table id="table" data-toggle="table" data-locale="zh-CN"
+										data-click-to-select="true"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+			</section>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+	$('#effecttime').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    });
+	$('#expiretime').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    });
+    
+    $('#btn_add').on('click', function () {
+    	//隐藏编辑提交按钮
+		$("#submitEditNode").attr("class", "hidden");
+		resetData();
+		initSelectOption($('#select_teamlist'), "sysTeamList.do", "", false);
+    });
+    
+    $('#btn_delete').on('click', function () {
+        var selectedRows = $('#table').bootstrapTable('getSelections');
+        if (selectedRows.length == 0) {
+            alert("请选择要操作的数据");
+            return;
+        }
+        if (!confirm("确认要删除当前选中的记录吗?"))
+			return;
+		var objects = $.map($('#table').bootstrapTable(
+				'getSelections'), function(row) {
+			return row.seqid;
+		});
+		delData(objects.join());
+    });
+    function delData(seqids) {
+		$.ajax({
+			type : "POST",
+			url : "deleteActivityIds.do",
+			data : {
+				seqids : seqids
+			},
+			dataType : "json",
+			success : function(data) {
+				if (data.rtn == "8888") {
+					alert("无此操作权限");
+				} else if (data.rtn == "0") {
+					initTable();
+				}
+			},
+			error : function(res) {
+				alert("操作失败");
+			}
+		});
+	}
+    
+    function resetData(){
+    	$('#effecttime').val("");
+        $('#expiretime').val("");
+        $('#actname').val("");
+    }
+
+    function initTable() {  
+        //先销毁表格  
+        $('#table').bootstrapTable('destroy');  
+        //初始化表格,动态从服务器加载数据  
+        $('#table').bootstrapTable({  
+            method: "post",  //使用get请求到服务器获取数据  
+            url: "getAllActivityList.do", //获取数据的Servlet地址 
+            contentType: "application/x-www-form-urlencoded",
+            toolbar: '#toolbar',
+            striped: true,  //表格显示条纹  
+            pagination: true, //启动分页  
+            pageSize: 10,  //每页显示的记录数  
+            pageNumber:1, //当前第几页  
+            pageList: [10, 20, 50, 100],  //记录数可选列表  
+            search: false,  //是否启用查询  
+            showColumns: true,  //显示下拉框勾选要显示的列  
+            showRefresh: false,  //显示刷新按钮  
+            sidePagination: "server", //表示服务端请求  
+            uniqueId: "ID",					 //每一行的唯一标识，一般为主键列
+            clickToSelect: false,				//是否启用点击选中行
+            minimumCountColumns: 2,			 //最少允许的列数
+            //设置为undefined可以获取pageNumber，pageSize，searchText，sortName，sortOrder  
+            //设置为limit可以获取limit, offset, search, sort, order  
+            queryParamsType : "undefined",   
+            queryParams: function queryParams(params) {   //设置查询参数  
+              var param = {    
+                  pageNumber: params.pageNumber,    
+                  pageSize: params.pageSize,  
+                  activity : $("#queryactname").val()  
+              };    
+              return param;                   
+            },
+            columns: [{
+                checkbox: true
+            },
+            {
+                field: 'seqid',
+                editable: true,
+                title: '活动ID'
+            }, {
+                editable: true,
+                field: 'actname',
+                title: '活动名称'
+            },
+            {
+                editable: true,
+                field: 'teamid',
+                title: 'Team',
+                visible: false
+            },
+            {
+                field: 'teamname',
+                title: 'Teamname',
+            },
+            {
+                field: 'effecttime',
+                editable: true,
+                title: '生效时间'
+            }, {
+                editable: true,
+                field: 'expiretime',
+                title: '失效时间'
+            },
+            {
+                editable: true,
+                field: 'statusdesc',
+                title: '状态',
+            },
+            {
+                field: 'editby',
+                editable: true,
+                title: '修改人'
+            }, {
+                editable: true,
+                field: 'edittime',
+                title: '修改时间'
+            },{
+				field : 'operate',
+				title : '操作',
+				align : 'center',
+				events : operateEvents,
+				formatter : operateFormatter
+			},
+            ],
+            onLoadSuccess: function(){  //加载成功时执行  
+               
+            },  
+            onLoadError: function(){  //加载失败时执行  
+            }  
+          });  
+      }  
+  
+    function operateFormatter(value, row, index) {
+		return [
+				'<a class="edit" href="javascript:void(0)" data-target="#addEditModal" data-toggle="modal" title="修改">',
+				'<i class="glyphicon glyphicon-edit"></i>',
+				'</a>&nbsp;&nbsp;&nbsp;&nbsp;',
+				'<a class="remove" href="javascript:void(0)" title="删除">',
+				'<i class="glyphicon glyphicon-remove"></i>', '</a>' ]
+				.join('');
+	}
+
+	window.operateEvents = {
+		'click .edit' : function(e, value, row, index) {
+			$("#submitAddNode").attr("class", "hidden");
+			resetData();//重置数据
+			$.each(row, function(key, val) {      
+		       if($('#'+key)){
+		    	   $('#'+key).val(val);
+		       }
+		 　　});
+			//初始化team
+			initSelectOption($('#select_teamlist'), "sysTeamList.do", row.teamid, false);
+		},
+		'click .remove' : function(e, value, row, index) {
+			if (!confirm("确认要删除该记录吗?"))
+				return;
+			delData(row.seqid);
+		}
+	};
+    
+    $(function () {
+        //调用函数，初始化表格  
+        initTable();  
+        //当点击查询按钮的时候执行  
+        $("#btn_query").bind("click", initTable);  
+        $('#submitAddNode').on('click', {action: "addActivity.do"}, addOrUpdateActivity);
+        $('#submitEditNode').on('click', {action: "updateActivity.do"}, addOrUpdateActivity);
+    });
+    
+    function ActivityIdBean(seqid, actname, teamid, effecttime, expiretime) {
+        this.seqid = seqid;
+        this.actname = actname;
+        this.teamid = teamid;
+        this.effecttime = effecttime;
+        this.expiretime = expiretime;
+    }
+
+    function addOrUpdateActivity(event) {
+    	if(!requireCheck(jQuery("#formdiv"))){return false;}
+    	
+        var teamid = $("#select_teamlist").val();
+        var actname = $('#actname').val();
+        var effecttime = $('#effecttime').val();
+        var expiretime = $('#expiretime').val();
+
+        var seqid = "";
+        if(event.data.action=="updateActivity.do"){
+        	seqid = $('#seqid').val();
+        }
+        var activity = new ActivityIdBean(seqid, actname, teamid, effecttime, expiretime);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: event.data.action,
+            data: {activity: JSON.stringify(activity)},
+            success: function (data) {
+            	if(data.rtn == "8888"){
+                	alert("无此操作权限");
+                }else{
+                	initTable();  
+                }
+            },
+            error: function (json) {
+                alert("操作失败");
+            }
+        });
+    }
+</script>
+</body>
+</html>

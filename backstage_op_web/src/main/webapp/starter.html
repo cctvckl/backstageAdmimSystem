@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | Starter</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/buttons.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+
+    <link rel="stylesheet" href="./css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="./js/jquery.ztree.all-3.5.js"></script>
+    <script>
+      $(function () {
+        var res = {"code":"OK","data":{"appId":"APP119","creator":null,"editor":null,"insertTime":null,"menuId":0,"menuName":"菜单根目录","menuOrder":null,"menuStatus":null,"menuType":2,"menuUrl":null,"nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 10:34:53.0","menuId":72,"menuName":"菜单管理","menuOrder":1,"menuStatus":1,"menuType":1,"menuUrl":"Menu","nodes":[],"remark":"test","seqId":75,"show":false,"systemPermId":"PEM001156","ts":"2014-07-30 10:00:50.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-23 08:34:17.0","menuId":13,"menuName":"目录1e","menuOrder":1,"menuStatus":1,"menuType":2,"menuUrl":"www.test.com","nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 08:25:47.0","menuId":40,"menuName":"测试菜单","menuOrder":5,"menuStatus":1,"menuType":1,"menuUrl":"Update111","nodes":[],"remark":"123456","seqId":58,"show":false,"systemPermId":"PEM001142","ts":"2014-07-28 11:50:24.0","upMenuId":13},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-31 06:27:59.0","menuId":92,"menuName":"员工管理","menuOrder":600,"menuStatus":1,"menuType":1,"menuUrl":"Staff","nodes":[],"remark":"","seqId":101,"show":false,"systemPermId":"PEM001185","ts":"2014-07-31 06:27:59.0","upMenuId":13}],"remark":"updateTest","seqId":42,"show":false,"systemPermId":null,"ts":"2014-07-28 12:22:20.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":null,"menuId":1,"menuName":"M1","menuOrder":2,"menuStatus":1,"menuType":2,"menuUrl":null,"nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 10:04:16.0","menuId":63,"menuName":"M1-1","menuOrder":66,"menuStatus":1,"menuType":2,"menuUrl":"aaa","nodes":[],"remark":"","seqId":72,"show":false,"systemPermId":null,"ts":"2014-07-28 12:45:32.0","upMenuId":1}],"remark":null,"seqId":65,"show":false,"systemPermId":"1","ts":"2014-07-28 12:23:04.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-24 12:51:28.0","menuId":18,"menuName":"目录3","menuOrder":3,"menuStatus":1,"menuType":2,"menuUrl":"1111","nodes":[],"remark":null,"seqId":51,"show":false,"systemPermId":"PEM001129","ts":"2014-07-25 09:33:35.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 08:28:56.0","menuId":41,"menuName":"测试菜单2","menuOrder":4,"menuStatus":1,"menuType":2,"menuUrl":"Loi","nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 09:05:33.0","menuId":42,"menuName":"测试菜单3","menuOrder":12,"menuStatus":1,"menuType":1,"menuUrl":"43534534","nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 09:06:42.0","menuId":44,"menuName":"test4","menuOrder":456,"menuStatus":1,"menuType":1,"menuUrl":"123","nodes":[],"remark":"123456","seqId":62,"show":false,"systemPermId":"PEM001146","ts":"2014-07-28 09:50:33.0","upMenuId":42}],"remark":"1212121","seqId":60,"show":false,"systemPermId":"PEM001144","ts":"2014-08-04 05:51:05.0","upMenuId":41}],"remark":"dddd","seqId":59,"show":false,"systemPermId":"PEM001143","ts":"2014-07-28 11:56:16.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-24 12:18:57.0","menuId":16,"menuName":"目录2","menuOrder":4,"menuStatus":1,"menuType":2,"menuUrl":"1111","nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 09:07:11.0","menuId":45,"menuName":"test2","menuOrder":999,"menuStatus":1,"menuType":1,"menuUrl":"pp","nodes":[],"remark":"9999","seqId":63,"show":false,"systemPermId":"PEM001147","ts":"2014-07-28 09:50:33.0","upMenuId":16}],"remark":null,"seqId":49,"show":false,"systemPermId":"PEM001230","ts":"2014-07-28 12:23:21.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 09:52:45.0","menuId":57,"menuName":"分配菜单","menuOrder":9,"menuStatus":1,"menuType":1,"menuUrl":"RoleMenu","nodes":[],"remark":null,"seqId":70,"show":false,"systemPermId":"PEM001154","ts":"2014-07-30 10:03:56.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 09:52:41.0","menuId":56,"menuName":"测试168","menuOrder":50,"menuStatus":1,"menuType":1,"menuUrl":"PPP","nodes":[],"remark":"5250","seqId":69,"show":false,"systemPermId":"PEM001153","ts":"2014-07-28 12:45:29.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":null,"menuId":20,"menuName":"菜单009","menuOrder":100,"menuStatus":1,"menuType":2,"menuUrl":null,"nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":null,"menuId":21,"menuName":"目录010","menuOrder":100,"menuStatus":1,"menuType":2,"menuUrl":null,"nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 09:05:58.0","menuId":43,"menuName":"测试菜单3","menuOrder":999,"menuStatus":1,"menuType":1,"menuUrl":"ppp","nodes":[],"remark":"9999","seqId":61,"show":false,"systemPermId":"PEM001145","ts":"2014-07-29 09:00:40.0","upMenuId":21}],"remark":null,"seqId":83,"show":false,"systemPermId":null,"ts":"2014-07-30 02:18:05.0","upMenuId":20}],"remark":null,"seqId":82,"show":false,"systemPermId":"PEM000002","ts":"2014-07-30 02:18:02.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":null,"menuId":24,"menuName":"test","menuOrder":100,"menuStatus":1,"menuType":2,"menuUrl":"111","nodes":[],"remark":null,"seqId":57,"show":false,"systemPermId":null,"ts":"2014-07-28 10:13:40.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":null,"menuId":23,"menuName":"目录011","menuOrder":100,"menuStatus":1,"menuType":1,"menuUrl":null,"nodes":[{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-23 08:35:12.0","menuId":15,"menuName":"menu1-1","menuOrder":1,"menuStatus":1,"menuType":1,"menuUrl":"1111","nodes":[],"remark":null,"seqId":44,"show":false,"systemPermId":null,"ts":"2014-07-28 03:40:50.0","upMenuId":23}],"remark":null,"seqId":84,"show":false,"systemPermId":null,"ts":"2014-07-30 02:18:29.0","upMenuId":0},{"appId":"APP119","creator":null,"editor":null,"insertTime":"2014-07-28 10:03:30.0","menuId":61,"menuName":"54545","menuOrder":4545,"menuStatus":1,"menuType":2,"menuUrl":"4545","nodes":[],"remark":"1545","seqId":71,"show":false,"systemPermId":null,"ts":"2014-07-28 12:45:31.0","upMenuId":0}],"remark":null,"seqId":0,"show":false,"systemPermId":null,"ts":null,"upMenuId":null},"msg":"成功"};
+        var setting = {
+          data:{
+            key:{
+              children:"nodes",
+              name:"menuName"
+            },
+            simpleData:{
+              enable:false
+            }
+          },
+          view:{
+            showline:true
+          }
+        };
+        var data = res.data;
+//        alert(JSON.stringify(data));
+//        $.fn.zTree.init($('#parent'),setting,data);
+        });
+    </script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+  </head>
+  <!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
+  <body class="hold-transition skin-blue sidebar-mini">
+  <ul id="parent" class="ztree">
+
+  </ul>
+  <a data-target="#myModal" data-toggle="modal" class="button button-action button-pill">Go</a>
+  <!-- 模态框（Modal） -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close"
+                  data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+            模态框（Modal）标题
+          </h4>
+        </div>
+        <div class="modal-body">
+          在这里添加一些文本
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"
+                  data-dismiss="modal">关闭
+          </button>
+          <button type="button" class="btn btn-primary">
+            提交更改
+          </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </body>
+</html>

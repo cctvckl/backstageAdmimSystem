@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">规则管理</div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group" style="margin-top: 15px">
+                                            <label class="control-label col-sm-1"
+                                                   for="queryRulename">规则名称</label>
+
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control"
+                                                       id="queryRulename">
+                                            </div>
+                                            <div class="col-sm-4" style="text-align: left;">
+                                                <button type="button" style="margin-left: 50px" class="btn btn-primary"
+                                                        id="btn_query">查询
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="toolbar" class="btn-group">
+                                <button id="btn_add" data-target="#addEditModal" data-toggle="modal"
+                                        type="button"
+                                        class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-plus"
+                                                              aria-hidden="true"></span>新增
+                                </button>
+                                <button id="btn_edit" type="button"
+                                        class="btn btn-default">
+                                                        <span class="glyphicon glyphicon-pencil"
+                                                              aria-hidden="true"></span>修改
+                                </button>
+                                <button id="btn_delete" data-target="#confirmDeleteModal" type="button"
+                                        class="btn btn-default"
+                                        data-toggle="modal">
+                                                        <span class="glyphicon glyphicon-remove"
+                                                              aria-hidden="true"></span>删除
+                                </button>
+                            </div>
+                            <!-- 删除确认弹出框 -->
+                            <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+                                 role="dialog" aria-labelledby="confirmDeleteLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" style="width: 400px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="confirmDeleteLabel">确认提示</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">取消
+                                            </button>
+                                            <button type="button" id="yesToDelete"
+                                                    class="btn btn-primary" data-dismiss="modal">确定
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal -->
+                            </div>
+
+                            <div class="row">
+                                <div class="modal fade" id="addEditModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="addEditModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close"
+                                                        data-dismiss="modal"
+                                                        aria-hidden="true">×
+                                                </button>
+                                                <h4 class="modal-title" id="addEditModalLabel">
+                                                </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                    <tr role="row">
+                                                        <td class="col-md-2">基本信息</td>
+                                                        <td class="col-md-10">
+                                                            <div class="col-md-12">
+                                                                <div class="show-grid row">
+                                                                    <h4>
+                                                                        <small class="col-md-4"><span
+                                                                                class="itemMustInput">*</span>规则名称
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <input type="text"
+                                                                               id="rulename"
+                                                                               class="form-control"
+                                                                               placeholder=""
+                                                                               aria-describedby="basic-addon2">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row show-grid">
+                                                                    <h4>
+                                                                        <small class="col-md-4">
+                                                                            <span class="itemMustInput">*</span>规则模板
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <select class="form-control"
+                                                                                name="ruleTemplatelist">
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="show-grid row">
+                                                                    <h4>
+                                                                        <small class="col-md-4"><span
+                                                                                class="itemMustInput">*</span>所属活动id
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <input type="text"
+                                                                               class="form-control"
+                                                                               placeholder=""
+                                                                               id="actId"
+                                                                               aria-describedby="basic-addon2">
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="row show-grid">
+                                                                    <h4>
+                                                                        <small class="col-md-4">
+                                                                            <span class="itemMustInput">*</span>规则状态
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <select class="form-control"
+                                                                                name="ruleStatusList">
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row show-grid">
+                                                                    <h4>
+                                                                        <small class="col-md-4">
+                                                                            规则白名单
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <input type="text"
+                                                                               class="form-control"
+                                                                               placeholder=""
+                                                                               id="ruleWhiteList"
+                                                                               aria-describedby="basic-addon2">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="show-grid row">
+                                                                    <h4>
+                                                                        <small class="col-md-4"><span
+                                                                                class="itemMustInput">*</span>规则开始时间
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div id="rulestartTimeDiv"
+                                                                         class="input-group col-md-8">
+                                                                        <input id="ruleStartTimeInput"
+                                                                               type="text"
+                                                                               class="form-control"
+                                                                               placeholder=""
+                                                                               aria-describedby="basic-addon2">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="show-grid row">
+                                                                    <h4>
+                                                                        <small class="col-md-4"><span
+                                                                                class="itemMustInput">*</span>规则结束时间
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div id="ruleExpiretimeDiv"
+                                                                         class="input-group col-md-8">
+                                                                        <input id="ruleEndTimeInput"
+                                                                               type="text"
+                                                                               class="form-control"
+                                                                               placeholder=""
+                                                                               aria-describedby="basic-addon2">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr role="row">
+                                                        <td class="col-md-2">规则属性</td>
+                                                        <td class="col-md-10" id="rulePrizeContainer">
+                                                        </td>
+                                                    </tr>
+                                                    <tr role="row">
+                                                        <td class="col-md-2">限制条件</td>
+                                                        <td class="col-md-10">
+                                                            <div class="col-md-12">
+                                                                <div class="show-grid row">
+                                                                    <h4>
+                                                                        <small class="col-md-4"><span
+                                                                                class="itemMustInput">*</span>次数限制
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <input type="text"
+                                                                               id="timeLimit"
+                                                                               class="form-control"
+                                                                               placeholder=""
+                                                                               aria-describedby="basic-addon2">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row show-grid">
+                                                                    <h4>
+                                                                        <small class="col-md-4">
+                                                                            <span class="itemMustInput">*</span>会员级别
+                                                                        </small>
+                                                                    </h4>
+                                                                    <div class="input-group col-md-8">
+                                                                        <select class="form-control"
+                                                                                name="memberTypeList">
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">
+                                                    关闭
+                                                </button>
+                                                <button type="button" id="submitAddNode"
+                                                        class="btn btn-primary"
+                                                        >
+                                                    提交新增
+                                                </button>
+                                                <button type="button" id="submitEditNode"
+                                                        class="btn btn-primary"
+                                                        data-dismiss="modal">
+                                                    提交修改
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                            </div>
+
+                            <table id="table" data-toggle="table"
+                                   data-click-to-select="true"></table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+
+</div>
+<!-- ./wrapper -->
+<script type="text/javascript" src="pages/manage/ruleMgt_UpCut.js"></script>
+<script type="text/javascript" src="pages/manage/ruleMgt_Register.js"></script>
+<script type="text/javascript" src="pages/manage/ruleMgt.js"></script>
+
+<script type="text/javascript">
+    //当前页面的js主要有以下几个部分组成：
+    //1:  table组件
+    //2： 表格上部工具栏：新增、编辑、删除的click事件
+    //3： 工具栏点击会弹出模态框，模态框的shown和hide事件，尤其是shown事件，在编辑时，涉及到根据服务器返回的数据进行回填，比较繁琐
+    //4： 点击模态框里面的新增或编辑按钮，提交请求到服务器，这边涉及到收集页面数据，发ajax请求给服务器等等
+    //5： 其他；比如需要根据模板列表下拉框的选项变化，加载不同的奖励项div（通过ajax请求获取独立的html内容）；其他工具函数
+
+    //全局变量定义区
+    //div，用来存放奖品区域，子元素为一个数组，包含1到多项奖励信息；针对不同的模板，里面应该存放不同类型的div
+    //如注册送模板时候，奖品区域的4行为：奖品类型、奖品id、活动类型；比如满减模板的时候，奖品区域的行为：奖品类型、活动类型、满减规则
+    var $prizeInfoDiv = $("#rulePrizeContainer");
+
+    //规则名称
+    var $rulename = $('#rulename');
+    //规则模板
+    var $ruleTemplatelist = $('select[name=ruleTemplatelist]');
+    //活动id
+    var $actId = $('#actId');
+    //规则状态
+    var $ruleStatusList = $('select[name=ruleStatusList]');
+    //规则开始时间
+    var $ruleStartTimeInput = $('#ruleStartTimeInput');
+    //规则结束时间
+    var $ruleEndTimeInput = $('#ruleEndTimeInput');
+    //会员级别
+    var $memberTypeList = $('select[name=memberTypeList]');
+    //次数限制
+    var $timeLimit = $('#timeLimit');
+    //表格组件
+    var $table = $('#table');
+    //判断用户点击的是新增还是编辑按钮
+    var G_isEdit;
+
+    var rtnSuccess = "0";
+    var selectOptionAttrName = "value";
+
+    var templateId_UpCut = 1;
+    var templateId_RegisterGift = 2;
+
+    //函数定义区域
+    //------------------------------------------begin:初始页面，新增，编辑，删除点击事件----------------------------------
+    $('#btn_add').on('click', function () {
+        G_isEdit = false;
+    });
+    $('#btn_edit').on('click', function () {
+        var selectedRows = $table.bootstrapTable('getSelections');
+        if (selectedRows.length == 0) {
+            alert("请选择要操作的数据");
+            return;
+        } else if (selectedRows.length > 1) {
+            alert("只能选择一条数据进行修改");
+            return;
+        }
+
+        $('#addEditModal').modal("toggle");
+        G_isEdit = true;
+    });
+    //------------------------------------------end:初始页面，新增，编辑，删除点击事件----------------------------------
+
+    //------------------------------------------begin:模态框里新增、编辑、删除提交事件----------------------------------
+    function addOrUpdateRule(event) {
+        //规则名
+        var ruleName = $rulename.val();
+        //规则模板名
+        var selectedRuleTemplate = $ruleTemplatelist.find("option:selected");
+        var templateId = selectedRuleTemplate.attr(selectOptionAttrName);
+        //活动id
+        var actId = $actId.val();
+        //规则状态id
+        var selectedRuleStatus = $ruleStatusList.find("option:selected");
+        var ruleStatusId = selectedRuleStatus.attr(selectOptionAttrName);
+        //规则开始时间
+        var startTime = $ruleStartTimeInput.val();
+        //规则结束时间
+        var endTime = $ruleEndTimeInput.val();
+
+        //以下获取规则的扩展信息：奖励信息，组装为数组形式
+//        这边需要根据不同模板进行区分
+        var $rulePrizeDivList = $(".rulePrizeDivToClone_UpCut");
+        var ruleExtVoArray = []; // 定义一个空数组
+        if (templateId_UpCut == templateId) {
+            //消费/折扣减免模板
+            $(".rulePrizeDivToClone_UpCut").each(function (index) {
+                console.log(index);
+
+                var ruleBaseExtVo = fillBaseRuleExtVo($(this));
+
+                //以下两个为数组元素，需要将这两个数组按下标一一对应起来;两个数组的大小肯定是一样的，因为满多少减多少肯定是成对出现
+                var upPriceListArray = $(this).find('input[name=upPriceToGetCutPrice]');
+                var cutPriceListArray = $(this).find('input[name=cutPriceOfPrize]');
+                var upCutVoArray = new Array();
+                for (var i = 0; i < upPriceListArray.length; i++) {
+//                    debugger;
+                    upCutVoArray[i] = new UpCutVo(upPriceListArray.eq(i).val(), cutPriceListArray.eq(i).val());
+                }
+
+                ruleExtVoArray.push( new RuleExtVo_UpCut(ruleBaseExtVo,upCutVoArray));
+            });
+
+        } else if (templateId_RegisterGift == templateId) {
+            //注册送模板
+            debugger;
+            $(".rulePrizeDivToClone_RegisterGift").each(function (index) {
+                console.log(index);
+                var ruleBaseExtVo = fillBaseRuleExtVo($(this));
+
+                //以下两个为数组元素，需要将这两个数组按下标一一对应起来;两个数组的大小肯定是一样的，因为满多少减多少肯定是成对出现
+                var $prizeId = $(this).find('input[name=prizeId]');
+                var $prizeKey = $(this).find('input[name=prizeKey]');
+                debugger;
+                var ruleExtVo = new RuleExtVo_Register(ruleBaseExtVo, $prizeId.val(), $prizeKey.val());
+
+                ruleExtVoArray.push(ruleExtVo);
+            });
+        }
+
+
+        //以下获取规则的限制条件
+        //规则名
+        var timeLimit = $timeLimit.val();
+        //会员级别
+        var selectedMemberType = $memberTypeList.find("option:selected");
+        var memberType = selectedMemberType.attr(selectOptionAttrName);
+
+        console.log(ruleVo + ":" + JSON.stringify(ruleVo));
+        var reqUrl = "";
+        var seqId = "";
+        if (event.data.action == "add") {
+            reqUrl = "/backstage_op_web/addRule.do";
+        } else if (event.data.action == "edit") {
+            var selectedRows = $table.bootstrapTable('getSelections');
+            var rowToUpdate = selectedRows[0];
+            seqId = rowToUpdate.seqId;
+            reqUrl = "/backstage_op_web/updateRule.do";
+        }
+        var ruleVo = new RuleVo(seqId, ruleName, templateId, actId, ruleStatusId, startTime, endTime, ruleExtVoArray, memberType, timeLimit);
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: reqUrl,
+            data: {rule: JSON.stringify(ruleVo)},
+            success: function (json) {
+                debugger;
+                if (json.rtn != rtnSuccess){
+                    alert(json.result);
+                }else{
+                    alert("操作成功");
+                    //刷新数据
+                    $table.bootstrapTable("refresh", "");
+                    $('#addEditModal').modal("toggle");
+                }
+            },
+            error: function (json) {
+                console.log(json.msg);
+                alert(json.msg);
+            }
+        });
+    }
+    $('#yesToDelete').on('click', function () {
+        var objects = $.map($table.bootstrapTable('getSelections'), function (row) {
+            return row.seqId;
+        });
+        $.ajax({
+            type: "POST",
+            url: "deleteRulesByIds.do",
+            data: {seqids: objects.join()},//将对象序列化成JSON字符串
+            dataType: "json",
+            success: function (data) {
+                if (data.rtn == "8888") {
+                    alert("无此操作权限");
+                } else if (data.rtn == "0") {
+                    $table.bootstrapTable("refresh", "");
+                }
+            },
+            error: function (res) {
+                console.log(json.msg);
+                alert(json.msg);
+            }
+        });
+    });
+    $('#submitAddNode').on('click', {action: "add"}, addOrUpdateRule);
+    $('#submitEditNode').on('click', {action: "edit"}, addOrUpdateRule);
+
+    //------------------------------------------end:模态框里新增、编辑、删除提交事件----------------------------------
+
+    //------------------------------------------begin:下拉列表改变事件、工具函数----------------------------------
+    $ruleTemplatelist.change(function () {
+        var templateId = $(this).find("option:selected").attr(selectOptionAttrName);
+
+        if (templateId_UpCut == templateId) {
+            //消费/折扣减免模板
+            $.get('pages/manage/ruleMgt_UpCut.html', function (htmlRsp) {
+                //此处的6意思是<body>这个字符串的长度，索引偏移6，因为只截取body元素内部的内容
+                htmlRsp = htmlRsp.slice(htmlRsp.indexOf('<body>') + 6, htmlRsp.indexOf('</body>'));
+                //注入奖品区域div
+                $prizeInfoDiv.html(htmlRsp);
+//                    debugger;
+                registerClick_UpCut();
+            });
+        } else if (templateId_RegisterGift == templateId) {
+            //注册送模板
+            $.get('pages/manage/ruleMgt_Register.html', function (htmlRsp) {
+                //此处的6意思是<body>这个字符串的长度，索引偏移6，因为只截取body元素内部的内容
+                htmlRsp = htmlRsp.slice(htmlRsp.indexOf('<body>') + 6, htmlRsp.indexOf('</body>'));
+                //注入奖品区域div
+                $prizeInfoDiv.html(htmlRsp);
+//                    debugger;
+                registerClick_Register();
+            });
+        } else {
+            $prizeInfoDiv.html("");
+        }
+    });
+
+    //------------------------------------------end:下拉列表改变事件、工具函数----------------------------------
+
+    //------------------------------------------begin:模态框显隐事件----------------------------------
+    $('#addEditModal').on('hide.bs.modal', function () {
+        $(this).removeData("bs.modal");
+        <!-- 还原弹出框按钮样式-->
+        $("#submitEditNode").attr("class", "btn btn-primary");
+        $("#submitAddNode").attr("class", "btn btn-primary");
+
+    });
+    $('#addEditModal').on('shown.bs.modal', function () {
+        console.log(G_isEdit);
+        $ruleStartTimeInput.datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+        $ruleEndTimeInput.datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+        //清空旧数据
+        $prizeInfoDiv.html("");
+        $rulename.val("");
+        $ruleTemplatelist.html("");
+        $actId.val("");
+        $ruleStatusList.html("");
+        $ruleStartTimeInput.val("");
+        $ruleEndTimeInput.val("");
+        $memberTypeList.html("");
+        $timeLimit.val("");
+        //获取模板下拉框和规则状态下拉框
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/backstage_op_web/getRuleTemplatesAndRuleStatus.do",
+            success: function (json) {
+                if (json.rtn != 0) {
+                    console.log("error: json.rtn != 0 ");
+                    return;
+                }
+                console.log("getRuleTemplatesAndRuleStatus success:" + json);
+                var templateArray = json.templateList;
+                var ruleTemplatelistSelectBody = "<option value=''></option>";
+                $.each(templateArray, function (i, n) {
+                    //填写模板名字下拉框
+                    ruleTemplatelistSelectBody += "<option value=" + n.seqId + ">" + n.templateName + "</option>";
+                });
+                $("select[name=ruleTemplatelist]").html(ruleTemplatelistSelectBody);
+                $("select[name=ruleStatusList]").html(createSelectByArray(json.ruleStatusList));
+                $("select[name=memberTypeList]").html(createSelectByArray(json.memberTypeList));
+            },
+            error: function (json) {
+                console.log(json.msg);
+                alert(json.msg);
+            }
+        });
+
+        //新增
+        if (!G_isEdit) {
+            //隐藏编辑提交按钮
+            $("#submitEditNode").attr("class", "hidden");
+        }
+        //编辑
+        else {
+            //隐藏新增提交按钮
+            $("#submitAddNode").attr("class", "hidden");
+
+            var selectedRows = $table.bootstrapTable('getSelections');
+            var rowToUpdate = selectedRows[0];
+            //获取要更新行的seqid
+            var seqIdOfRowToUpdate = selectedRows[0].seqId;
+            //查询该条规则的数据，包括扩展信息
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                data: {ruleId: seqIdOfRowToUpdate},//将对象序列化成JSON字符串
+                url: "/backstage_op_web/getOneRuleByRuleId.do",
+                success: function (json) {
+                    var data = json.data;
+                    console.log("success:" + data);
+                    //---------------------------------------------------------------------------------------------
+                    //------------------------------------------begin:回填基本信息----------------------------------
+                    //---------------------------------------------------------------------------------------------
+                    //规则名称
+                    $rulename.val(data.ruleName);
+//                    debugger;
+                    //规则模板
+                    $.each($ruleTemplatelist.find("option"), function (index) {
+//                        debugger;
+                        if ($(this).attr(selectOptionAttrName) == data.templateId) {
+                            $(this).attr("selected", "selected");
+                        }
+                    });
+                    //活动id
+                    $actId.val(data.actId);
+                    //规则状态
+                    $.each($ruleStatusList.find("option"), function (index) {
+//                        debugger;
+                        if ($(this).attr(selectOptionAttrName) == data.ruleStatusId) {
+                            $(this).attr("selected", "selected");
+                        }
+                    });
+                    //规则开始时间
+                    $ruleStartTimeInput.val(data.startTime);
+                    //规则结束时间
+                    $ruleEndTimeInput.val(data.endTime);
+                    //---------------------------------------------------------------------------------------------
+                    //------------------------------------------end:回填基本信息------------------------------------
+                    //---------------------------------------------------------------------------------------------
+
+                    //---------------------------------------------------------------------------------------------
+                    //------------------------------------------begin:回填奖励信息----------------------------------
+                    //---------------------------------------------------------------------------------------------
+                    //回填奖励信息，这是一个数组，需要根据数组长度生成对应的几个奖励
+                    var ruleExtVosArray = data.ruleExtVos;
+                    if (templateId_UpCut == data.templateId) {
+                        //消费/折扣减免模板
+                        fillPrizeHtml_UpCut(ruleExtVosArray);
+                    } else if (templateId_RegisterGift == data.templateId) {
+                        console.log("data.templateId:"+data.templateId);
+                        console.log("ruleExtVosArray:"+ruleExtVosArray);
+                        //注册送模板
+                        fillPrizeHtml_Register(ruleExtVosArray);
+                    } else {
+
+                    }
+                    //---------------------------------------------------------------------------------------------
+                    //------------------------------------------end:回填奖励信息----------------------------------
+                    //---------------------------------------------------------------------------------------------
+
+                    //---------------------------------------------------------------------------------------------
+                    //------------------------------------------begin:回填限制条件----------------------------------
+                    //---------------------------------------------------------------------------------------------
+                    //会员级别
+                    $.each($memberTypeList.find("option"), function (index) {
+//                        debugger;
+                        if ($(this).attr(selectOptionAttrName) == data.vipGrade) {
+                            $(this).attr("selected", "selected");
+                        }
+                    });
+                    //次数限制
+                    $timeLimit.val(data.timeLimit);
+                    //---------------------------------------------------------------------------------------------
+                    //------------------------------------------end:回填限制条件----------------------------------
+                    //---------------------------------------------------------------------------------------------
+                },
+                error: function (json) {
+                    console.log(json.msg);
+                    alert(json.msg);
+                }
+            });
+
+        }
+
+    });
+    //------------------------------------------end:模态框显隐事件----------------------------------
+
+    //------------------------------------------begin:表格定义----------------------------------
+
+    $(function () {
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        $('#btn_query').on('click', function () {
+            var ruleName = $("#queryRulename").val();
+            $table.bootstrapTable("refresh", {query: {rule: ruleName}});
+        });
+    });
+    //------------------------------------------end:表格定义----------------------------------
+
+</script>
+</body>
+</html>

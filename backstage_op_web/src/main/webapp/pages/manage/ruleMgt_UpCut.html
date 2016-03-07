@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<!--<script type="text/javascript" src="pages/manage/ruleMgt_UpCut.js"></script>-->
+<div class="rulePrizeDivToClone_UpCut col-md-12">
+
+    <div class="show-grid row">
+        <h4>
+            <small class="col-md-4"><span
+                    class="itemMustInput">*</span>奖品具体类型
+            </small>
+        </h4>
+        <div class="input-group col-md-8">
+            <select class="form-control"
+                    name="prizeDetailTypeList"
+                    style="width:76%;">
+                <option value=""></option>
+                <option value=388>会员价格直减</option>
+            </select>
+            <span class="glyphicon glyphicon-plus col-md-2"
+                  name="button_addRulePrizeItem"
+                  aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-remove col-md-2"
+                  name="button_rmvRulePrizeItem"
+                  aria-hidden="true"
+                  style="display: none"></span>
+        </div>
+    </div>
+    <div class="row show-grid">
+        <h4>
+            <small class="col-md-4">
+                <span class="itemMustInput">*</span>活动类型
+            </small>
+        </h4>
+        <div class="input-group col-md-8">
+            <select class="form-control " name="actTypeList">
+                <option value=""></option>
+                <option value=379>满减</option>
+                <option value=380>阶梯满减</option>
+            </select>
+        </div>
+    </div>
+    <div class="show-grid row">
+        <h4>
+            <small class="col-md-4"><span
+                    class="itemMustInput">*</span>满减规则
+            </small>
+        </h4>
+
+        <div class="col-md-8">
+            <div class="row show-grid"
+                 name="upCutDivToClone"
+                 style="padding-top: 0">
+                <div class="form-horizontal form-group">
+                    <h4>
+                        <small class="control-label col-sm-1">满</small>
+                    </h4>
+                    <div class="col-sm-3">
+                        <input type="text"
+                               class="form-control"
+                               placeholder=""
+                               name="upPriceToGetCutPrice"
+                               aria-describedby="basic-addon2">
+                    </div>
+                    <h4>
+                        <small style="text-align:left;float:left;padding-top:7px;">元</small>
+                    </h4>
+                    <h4>
+                        <small style="text-align:left;float:left;padding-top:7px;margin-left:10px;">减</small>
+                    </h4>
+                    <div class="col-sm-3">
+                        <input type="text"
+                               class="form-control"
+                               placeholder=""
+                               name="cutPriceOfPrize"
+                               aria-describedby="basic-addon2">
+                    </div>
+                    <h4>
+                        <small style="text-align:left;float:left;padding-top:7px;">元</small>
+                    </h4>
+                </div>
+                <span class="glyphicon glyphicon-plus col-md-2"
+                      name="button_addUpCutItem"
+                      aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove col-md-2"
+                      name="button_rmvUpCutItem"
+                      aria-hidden="true"
+                      style="display: none"></span>
+            </div>
+        </div>
+    </div>
+    <hr/>
+</div>
+
+</body>
+</html>

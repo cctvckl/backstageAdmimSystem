@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modal Table</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+    <link href="../../plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet"/>
+    <!-- jQuery 2.1.4 -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../plugins/bootstrap-table/bootstrap-table.js"></script>
+    <script src="ga.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Modal Table</h1>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalTable">
+            Launch modal table
+        </button>
+        <div class="modal fade" id="modalTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Modal table</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="table"
+                               data-toggle="table"
+                               data-height="299"
+                               data-url="/backstage_op_web/priceList"
+                                >
+                            <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="name">Item Name</th>
+                                <th data-field="price">Item Price</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+<script>
+    var $table = $('#table');
+
+    $(function () {
+        $('#modalTable').on('shown.bs.modal', function () {
+            console.log("jjj");
+            $table.bootstrapTable('resetView');
+        });
+    });
+</script>
+</body>
+</html>
